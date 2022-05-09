@@ -2,18 +2,21 @@
  * ! don't forget to run once for registration after added new commands!
  */
 
-const { SlashCommandBuilder } = require('@discordjs/builders');
+const fs = require('node:fs');
+// const { SlashCommandBuilder } = require('@discordjs/builders');
 const { REST } = require('@discordjs/rest');
 const { Routes } = require('discord-api-types/v10');
 const dotenv = require('dotenv');
 
 dotenv.config();
 
-const commands = [
-	new SlashCommandBuilder()
-		.setName('random')
-		.setDescription('Replies with random Wattson text quip!'),
-].map((command) => command.toJSON());
+const commands = [];
+const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('js'));
+
+for (const file of commandFiles) {
+	const command = require(`./commands/${file}`);
+	commands.push(command.data.toJSON());
+}
 
 const rest = new REST({ version: 10 }).setToken(process.env.TOKEN);
 

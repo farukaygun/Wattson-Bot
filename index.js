@@ -1,7 +1,7 @@
 const dotenv = require('dotenv');
 const fs = require('node:fs');
 const { Client, Collection, Intents, MessageEmbed } = require('discord.js');
-const { GetRandomWelcomeTextQuip } = require('./helpers/RandomWelcomeTextQuip');
+const { GetRandomWelcomeTextQuip } = require('./libs/RandomWelcomeTextQuip');
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MEMBERS] });
 
 dotenv.config();
@@ -56,7 +56,7 @@ client.on('guildMemberAdd', async (member) => {
 	const embeddedMessage = new MessageEmbed()
 		.setColor('0099ff')
 		.setTitle('New Nessie Lover!')
-		.setDescription(`${member} \n\n` + GetRandomWelcomeTextQuip());
+		.setDescription(`Welcome ${member}! \n\n` + GetRandomWelcomeTextQuip());
 
 	member.guild.channels.cache
 		.get(process.env.GENERAL_ID)

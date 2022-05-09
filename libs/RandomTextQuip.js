@@ -15,7 +15,7 @@ const types = [
 	'Ring Status',
 ];
 
-const GetRandomTextQuip = () => {
+const GetRandomTextQuip = async () => {
 	const rawData = fs.readFileSync(
 		path.resolve(__dirname, '../data/Wattson Voice Lines.json'),
 	);
