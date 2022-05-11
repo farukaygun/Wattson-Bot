@@ -3,12 +3,11 @@
  */
 
 const fs = require('node:fs');
-// const { SlashCommandBuilder } = require('@discordjs/builders');
+const dotenv = require('dotenv');
 const { REST } = require('@discordjs/rest');
 const { Routes } = require('discord-api-types/v10');
-const dotenv = require('dotenv');
 
-dotenv.config();
+dotenv.config({ path: __dirname + '/../.env' });
 
 const commands = [];
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('js'));

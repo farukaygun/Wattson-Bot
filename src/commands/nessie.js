@@ -7,6 +7,6 @@ module.exports = {
 		.setDescription('Replies with random Nessie image.'),
 	async execute(interaction) {
 		const imageObj = { image: await GetRandomNessieImage() };
-		await interaction.reply(imageObj.image + '');
+		await interaction.reply(imageObj.image);
 	},
 };

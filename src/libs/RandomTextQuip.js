@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const { GetRandomInt } = require('./RandomInt');
 
 const types = [
 	'Abilities',
@@ -23,7 +24,8 @@ const GetRandomTextQuip = async () => {
 	const parsedData = JSON.parse(rawData);
 	const randomTypeIndex = Math.floor(Math.random() * 11);
 	const randomType = types[randomTypeIndex];
-	const randomObjectIndex = Math.floor(Math.random() * Object.keys(parsedData[randomType]).length);
+	// const randomObjectIndex = Math.floor(Math.random() * Object.keys(parsedData[randomType]).length);
+	const randomObjectIndex = await GetRandomInt(1, Object.keys(parsedData[randomType]).length);
 
 	const randomQuip = parsedData[randomType][randomObjectIndex]['text'];
 

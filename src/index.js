@@ -2,9 +2,15 @@ const dotenv = require('dotenv');
 const fs = require('node:fs');
 const { Client, Collection, Intents, MessageEmbed } = require('discord.js');
 const { GetRandomWelcomeTextQuip } = require('./libs/RandomWelcomeTextQuip');
-const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MEMBERS] });
+const client = new Client({
+	intents: [
+		Intents.FLAGS.GUILDS,
+		Intents.FLAGS.GUILD_MEMBERS,
+		Intents.FLAGS.GUILD_VOICE_STATES,
+	],
+});
 
-dotenv.config();
+dotenv.config({ path: __dirname + '/../.env' });
 
 // commands handler
 client.commands = new Collection();
@@ -26,8 +32,7 @@ for (const file of eventFiles) {
 	const event = require(`./events/${file}`);
 	if (event.once) {
 		client.once(event.name, (...args) => event.execute(...args));
-	}
-	else {
+	} else {
 		client.on(event.name, (...args) => event.execute(...args));
 	}
 }
@@ -41,8 +46,7 @@ client.on('interactionCreate', async (interaction) => {
 
 	try {
 		await command.execute(interaction);
-	}
-	catch (error) {
+	} catch (error) {
 		console.error(error);
 		await interaction.reply({
 			content: 'There was an error while executing command!',
@@ -59,7 +63,7 @@ client.on('guildMemberAdd', async (member) => {
 		.setDescription(`Welcome ${member}! \n\n` + GetRandomWelcomeTextQuip());
 
 	member.guild.channels.cache
-		.get(process.env.GENERAL_ID)
+		.get(process.env.WELCOME_CHANNEL_ID)
 		.send({ embeds: [embeddedMessage] });
 });
 

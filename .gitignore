@@ -140,3 +140,4 @@ dist
 
 # user
 .env
+/src/data/Wattson Voice Lines
