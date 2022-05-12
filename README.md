@@ -28,13 +28,13 @@
 
 ### Note
 > Don't forget to give;
-> **'Send Messages'**
-> **'Send Messages in Threads'**
-> **'Embed Links'**
-> **'Attach Files'**
-> **'Read Message History'**
-> **'Mention Everyone'**
-> **'Use Slash Commands'**
-> **'Connect'**
+> **'Send Messages'**,
+> **'Send Messages in Threads'**,
+> **'Embed Links'**,
+> **'Attach Files'**,
+> **'Read Message History'**,
+> **'Mention Everyone'**,
+> **'Use Slash Commands'**,
+> **'Connect'**,
 > **'Speak'**
 > permissions to Wattson!
