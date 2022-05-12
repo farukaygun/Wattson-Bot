@@ -3,17 +3,17 @@ const path = require('path');
 const { GetRandomInt } = require('./RandomInt');
 
 const GetRandomVoiceLineQuip = async () => {
-	const filePath = path.resolve(
-		__dirname,
-		'../data/Wattson Voice Lines/sounds/',
-	);
-	const files = fs.readdirSync(filePath);
+	try {
+		const filePath = path.resolve(__dirname, '../data/Wattson Voice Lines/sounds/');
+		const files = fs.readdirSync(filePath);
 
-	// const randomFileIndex = Math.floor(Math.random() * files.length);
-	const randomFileIndex = await GetRandomInt(1, files.length);
+		const randomFileIndex = await GetRandomInt(1, files.length - 1);
 
-	const randomVoiceLine = files[randomFileIndex];
-	return randomVoiceLine;
+		const randomVoiceLine = files[randomFileIndex];
+		return randomVoiceLine;
+	} catch (error) {
+		console.error(error);
+	}
 };
 
 module.exports = { GetRandomVoiceLineQuip };

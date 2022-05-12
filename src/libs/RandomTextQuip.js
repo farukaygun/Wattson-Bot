@@ -17,19 +17,19 @@ const types = [
 ];
 
 const GetRandomTextQuip = async () => {
-	const rawData = fs.readFileSync(
-		path.resolve(__dirname, '../data/Wattson Voice Lines.json'),
-	);
+	try {
+		const rawData = fs.readFileSync(path.resolve(__dirname, '../data/Wattson Voice Lines.json'));
 
-	const parsedData = JSON.parse(rawData);
-	const randomTypeIndex = Math.floor(Math.random() * 11);
-	const randomType = types[randomTypeIndex];
-	// const randomObjectIndex = Math.floor(Math.random() * Object.keys(parsedData[randomType]).length);
-	const randomObjectIndex = await GetRandomInt(1, Object.keys(parsedData[randomType]).length);
+		const parsedData = JSON.parse(rawData);
+		const randomTypeIndex = Math.floor(Math.random() * 11);
+		const randomType = types[randomTypeIndex];
+		const randomObjectIndex = await GetRandomInt(0, Object.keys(parsedData[randomType]).length - 1);
+		const randomQuip = parsedData[randomType][randomObjectIndex]['text'];
 
-	const randomQuip = parsedData[randomType][randomObjectIndex]['text'];
-
-	return randomQuip;
+		return randomQuip;
+	} catch (error) {
+		console.error(error);
+	}
 };
 
 module.exports = { GetRandomTextQuip };

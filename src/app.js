@@ -15,7 +15,7 @@ dotenv.config({ path: __dirname + '/../.env' });
 // commands handler
 client.commands = new Collection();
 const commandFiles = fs
-	.readdirSync('./commands')
+	.readdirSync('./src/commands')
 	.filter((file) => file.endsWith('.js'));
 
 for (const file of commandFiles) {
@@ -25,7 +25,7 @@ for (const file of commandFiles) {
 
 // events handler
 const eventFiles = fs
-	.readdirSync('./events')
+	.readdirSync('./src/events')
 	.filter((file) => file.endsWith('.js'));
 
 for (const file of eventFiles) {

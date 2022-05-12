@@ -1,5 +1,6 @@
 const path = require('path');
 const { SlashCommandBuilder } = require('@discordjs/builders');
+const { Permissions } = require('discord.js');
 const { GetRandomTextQuip } = require('../libs/RandomTextQuip');
 const { GetRandomVoiceLineQuip } = require('../libs/RandomVoiceLineQuip');
 const {
@@ -41,8 +42,17 @@ const RandomVoiceLine = async (interaction) => {
 		adapterCreator: interaction.guild.voiceAdapterCreator,
 	}).subscribe(player);
 
-	if (!connection.connection.joinConfig.channelId) {
+	// check user voice channel
+	const voiceChannel = connection.connection.joinConfig.channelId;
+	if (!voiceChannel) {
 		await interaction.reply('Nessie lovers must be in voice channel!');
+		return;
+	}
+
+	// check required permissions
+	const permissions = interaction.guild.me.permissions;
+	if (!permissions.has(Permissions.FLAGS.CONNECT) || !permissions.has(Permissions.FLAGS.SPEAK)) {
+		await interaction.reply('I need the permissions to join and speak in your voice channel!');
 		return;
 	}
 
@@ -52,10 +62,6 @@ const RandomVoiceLine = async (interaction) => {
 	);
 	player.play(audio);
 	player.once(AudioPlayerStatus.Playing, () => {
-		interaction.reply('playing ' + fileName + '!');
-	});
-
-	player.on('finish', () => {
-		connection.unsubscribe();
+		interaction.reply('playing ' + fileName);
 	});
 };
