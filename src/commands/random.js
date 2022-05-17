@@ -1,8 +1,8 @@
 const path = require('path');
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const { Permissions } = require('discord.js');
-const { GetRandomTextQuip } = require('../libs/RandomTextQuip');
-const { GetRandomVoiceLineQuip } = require('../libs/RandomVoiceLineQuip');
+const { GetRandomTextQuip } = require('../libs/randomTextQuip');
+const { GetRandomVoiceLineQuip } = require('../libs/randomVoiceLineQuip');
 const {
 	createAudioPlayer,
 	createAudioResource,
@@ -19,12 +19,12 @@ module.exports = {
 		.addSubcommand((subCommand) =>
 			subCommand
 				.setName('text')
-				.setDescription('Replies with random Wattson text quip.'),
+				.setDescription('Replies with random Wattson text quip.')
 		)
 		.addSubcommand((subCommand) =>
 			subCommand
 				.setName('voice')
-				.setDescription('Replies with random Wattson voice line.'),
+				.setDescription('Replies with random Wattson voice line.')
 		),
 	async execute(interaction) {
 		if (interaction.options.getSubcommand() === 'text') {
@@ -51,14 +51,19 @@ const RandomVoiceLine = async (interaction) => {
 
 	// check required permissions
 	const permissions = interaction.guild.me.permissions;
-	if (!permissions.has(Permissions.FLAGS.CONNECT) || !permissions.has(Permissions.FLAGS.SPEAK)) {
-		await interaction.reply('I need the permissions to join and speak in your voice channel!');
+	if (
+		!permissions.has(Permissions.FLAGS.CONNECT) ||
+		!permissions.has(Permissions.FLAGS.SPEAK)
+	) {
+		await interaction.reply(
+			'I need the permissions to join and speak in your voice channel!'
+		);
 		return;
 	}
 
 	const fileName = await GetRandomVoiceLineQuip();
 	const audio = createAudioResource(
-		path.join(__dirname, '../data/Wattson Voice Lines/sounds/' + fileName),
+		path.join(__dirname, '../data/Wattson Voice Lines/sounds/' + fileName)
 	);
 	player.play(audio);
 	player.once(AudioPlayerStatus.Playing, () => {

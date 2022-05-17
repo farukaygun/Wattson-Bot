@@ -139,6 +139,6 @@ dist
 .svelte-kit
 
 # user
-.env
 /src/data/Wattson Voice Lines
 .vscode
+.idea

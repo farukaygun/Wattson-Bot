@@ -1,11 +1,6 @@
-
 # **Wattson Bot**
 
 **'Circuit's broken! Someone else is here.'**
-  
-> Video:
-> 
-> [![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/N7lgKbtZpOI/0.jpg)](https://www.youtube.com/watch?v=N7lgKbtZpOI)
 
 <br/><br/>
 
@@ -13,17 +8,18 @@
 
 <br/>
 
-## Requirements
+## **Requirements**
+
 - [Node.js](https://nodejs.dev/download)
 
 <br/>
 
-## Installation
+## **Installation**
 
 <br/>
 
 > [How to create a Discord bot?](https://discord.com/developers/docs/getting-started)
-> 
+>
 > [How to enable developer mode and getting channel id on Discord?](https://beebom.com/how-enable-disable-developer-mode-discord/#:~:text=%28Android,%20iOS%29-,1.,And%20that%27s%20it.)
 
 - Download [voice lines](https://1drv.ms/u/s!AsHdGflePryehtN7hq1YNtVv8G0Deg?e=fMDZH4) and extract to './{Project dir}/data/'
@@ -32,41 +28,64 @@
 - Enter your bot token to **TOKEN**.
 - Enter your bot client to **CLIENT_ID**.
 - Enter your welcome channel id to **WELCOME_CHANNEL_ID**.
-- Open terminal in project dir and enter **node ./src/app.js**.
+- Open terminal in project dir and enter **node ./index.js**.
 - Done! Wattson should be alive now!
 
-> ### Note
-Don't forget to give;
+> ### **Note**
+>
+> Don't forget to give;
+
 - **'Send Messages'**,
 - **'Send Messages in Threads'**,
 - **'Embed Links'**,
 - **'Attach Files'**,
-- **'Read Message History'**, 
+- **'Read Message History'**,
 - **'Mention Everyone'**,
 - **'Use Slash Commands'**,
-- **'Connect'**, 
+- **'Connect'**,
 - **'Speak'**
- 
- permissions to Wattson!
+
+permissions to Wattson!
 
 <br/><br/>
 
 # **Features**
 
-## Commands
+## **Commands**
+
+### **General**
+
 - **/random**
-  - parameters: 
+  - parameters:
     - **text**: Replies with random Wattson text quip.
     - **voice**: Replies with random Wattson voice line.
 - **/nessie** : Replies with random Nessie image.
 - **/author**: Replies with Wattson bot contributors.
 
+### **Music**
+
+- **/play**
+
+  - subcommands:
+    - **song**: Wattson will play song with given url.
+    - **search**: Wattson will find and play song with given keywords.
+    - **playlist**: Wattson will play playlist with given url.
+
+- **/pause**: Wattson displays the current song queue.
+- **/resume**: Wattson found no songs in the queue.
+- **/stop**: Wattson stops the plays songs and clears the queue.
+- **/skip**: Wattson skips the current song.
+- **/queue**: Wattson displays the current song queue.
+- **/info**: Wattson displays info about the currently playing song.
+
 <br/>
 
-## Other Feautures
+## **Other Feautures**
+
 - Wattson say welcome users who joined channel.
 
 <br/>
 
-## Planned
+## **Planned**
+
 - I'm planning to add feature Wattson will play audio from youtube.

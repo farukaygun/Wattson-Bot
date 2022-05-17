@@ -1,5 +1,5 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
-const { GetRandomNessieImage } = require('../libs/RandomNessieImage');
+const { GetRandomNessieImage } = require('../libs/randomNessieImage');
 
 module.exports = {
 	data: new SlashCommandBuilder()

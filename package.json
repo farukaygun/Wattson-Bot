@@ -1,26 +1,35 @@
 {
-  "dependencies": {
-    "@discordjs/builders": "^0.13.0",
-    "@discordjs/rest": "^0.4.1",
-    "@discordjs/voice": "^0.9.0",
-    "discord-api-types": "^0.32.1",
-    "discord.js": "^13.6.0",
-    "dotenv": "^16.0.0",
-    "ffmpeg": "^0.0.4",
-    "ffmpeg-static": "^4.4.1",
-    "libsodium-wrappers": "^0.7.10"
-  },
-  "name": "wattson-bot",
-  "version": "1.0.0",
-  "description": "Wattson Discord Bot",
-  "main": "./src/app.js",
-  "devDependencies": {
-    "eslint": "^8.15.0"
-  },
-  "scripts": {
-	"debug": "node ./src/app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "Faruk Aygün",
-  "license": "ISC"
+	"name": "wattson-bot",
+	"version": "1.0.0",
+	"description": "Wattson Discord Bot",
+	"author": "Faruk Aygün",
+	"license": "ISC",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"format:check": "prettier --check .",
+		"format: write": "prettier --write .",
+		"lint: fix": "eslint --fix .",
+		"start": "node ./index.js"
+	},
+	"keywords": [],
+	"dependencies": {
+		"@discordjs/builders": "^0.13.0",
+		"@discordjs/opus": "^0.5.3",
+		"@discordjs/rest": "^0.4.1",
+		"@discordjs/voice": "^0.9.0",
+		"discord-api-types": "^0.32.1",
+		"discord-player": "^5.2.2",
+		"discord.js": "^13.7.0",
+		"dotenv": "^16.0.1",
+		"ffmpeg": "^0.0.4",
+		"ffmpeg-static": "^4.4.1",
+		"libsodium-wrappers": "^0.7.10",
+		"yt-search": "^2.10.3"
+	},
+	"devDependencies": {
+		"eslint": "^8.15.0",
+		"eslint-config-prettier": "^8.5.0",
+		"prettier": "2.6.2"
+	}
 }

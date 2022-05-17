@@ -14,9 +14,7 @@ const GetRandomInt = async (min, max) => {
 		min = Math.ceil(min);
 		max = Math.floor(max);
 
-		const num = Math.floor(randomNumber * (max - min + 1)) + min;
-
-		return num;
+		return Math.floor(randomNumber * (max - min + 1)) + min;
 	} catch (error) {
 		console.error(error);
 	}

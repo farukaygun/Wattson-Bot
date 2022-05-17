@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const { GetRandomInt } = require('./RandomInt');
+const { GetRandomInt } = require('./randomInt');
 
 const types = [
 	'Abilities',
@@ -18,15 +18,19 @@ const types = [
 
 const GetRandomTextQuip = async () => {
 	try {
-		const rawData = fs.readFileSync(path.resolve(__dirname, '../data/Wattson Voice Lines.json'));
+		const rawData = fs.readFileSync(
+			path.resolve(__dirname, '../data/Wattson Voice Lines.json')
+		);
 
-		const parsedData = JSON.parse(rawData);
+		const parsedData = JSON.parse(rawData.toString());
 		const randomTypeIndex = Math.floor(Math.random() * 11);
 		const randomType = types[randomTypeIndex];
-		const randomObjectIndex = await GetRandomInt(0, Object.keys(parsedData[randomType]).length - 1);
-		const randomQuip = parsedData[randomType][randomObjectIndex]['text'];
+		const randomObjectIndex = await GetRandomInt(
+			0,
+			Object.keys(parsedData[randomType]).length - 1
+		);
 
-		return randomQuip;
+		return parsedData[randomType][randomObjectIndex]['text'];
 	} catch (error) {
 		console.error(error);
 	}

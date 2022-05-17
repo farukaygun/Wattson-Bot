@@ -1,7 +1,12 @@
 const dotenv = require('dotenv');
 const fs = require('node:fs');
 const { Client, Collection, Intents, MessageEmbed } = require('discord.js');
-const { GetRandomWelcomeTextQuip } = require('./libs/RandomWelcomeTextQuip');
+const {
+	GetRandomWelcomeTextQuip,
+} = require('./src/libs/randomWelcomeTextQuip');
+
+const { Player } = require('discord-player');
+
 const client = new Client({
 	intents: [
 		Intents.FLAGS.GUILDS,
@@ -10,7 +15,14 @@ const client = new Client({
 	],
 });
 
-dotenv.config({ path: __dirname + '/../.env' });
+dotenv.config();
+
+client.player = new Player(client, {
+	ytdlOptions: {
+		quality: 'highestaudio',
+		highWaterMark: 1 << 25,
+	},
+});
 
 // commands handler
 client.commands = new Collection();
@@ -19,7 +31,7 @@ const commandFiles = fs
 	.filter((file) => file.endsWith('.js'));
 
 for (const file of commandFiles) {
-	const command = require(`./commands/${file}`);
+	const command = require(`./src/commands/${file}`);
 	client.commands.set(command.data.name, command);
 }
 
@@ -29,7 +41,7 @@ const eventFiles = fs
 	.filter((file) => file.endsWith('.js'));
 
 for (const file of eventFiles) {
-	const event = require(`./events/${file}`);
+	const event = require(`./src/events/${file}`);
 	if (event.once) {
 		client.once(event.name, (...args) => event.execute(...args));
 	} else {
@@ -68,3 +80,7 @@ client.on('guildMemberAdd', async (member) => {
 });
 
 client.login(process.env.TOKEN);
+
+module.exports = {
+	client,
+};
