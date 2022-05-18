@@ -1,6 +1,14 @@
 # **Wattson Bot**
 
-**'Circuit's broken! Someone else is here.'**
+> **'Circuit's broken! Someone else is here.'**
+
+<br/>
+
+### **Support**
+
+Support Wattson Bot for server costs.
+
+[![Kreosus](https://i.imgur.com/CXBYb6g.jpg?2)](https://kreosus.com/farukaygun)
 
 <br/><br/>
 
@@ -83,9 +91,3 @@ permissions to Wattson!
 ## **Other Feautures**
 
 - Wattson say welcome users who joined channel.
-
-<br/>
-
-## **Planned**
-
-- I'm planning to add feature Wattson will play audio from youtube.
