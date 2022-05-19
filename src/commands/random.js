@@ -36,18 +36,18 @@ module.exports = {
 };
 
 const RandomVoiceLine = async (interaction) => {
-	const connection = joinVoiceChannel({
-		channelId: interaction.member.voice.channelId,
-		guildId: interaction.guildId,
-		adapterCreator: interaction.guild.voiceAdapterCreator,
-	}).subscribe(player);
-
 	// check user voice channel
-	const voiceChannel = connection.connection.joinConfig.channelId;
+	const voiceChannel = interaction.member.voice.channel;
 	if (!voiceChannel) {
 		await interaction.reply('Nessie lovers must be in voice channel!');
 		return;
 	}
+
+	joinVoiceChannel({
+		channelId: interaction.member.voice.channelId,
+		guildId: interaction.guildId,
+		adapterCreator: interaction.guild.voiceAdapterCreator,
+	}).subscribe(player);
 
 	// check required permissions
 	const permissions = interaction.guild.me.permissions;
@@ -67,6 +67,6 @@ const RandomVoiceLine = async (interaction) => {
 	);
 	player.play(audio);
 	player.once(AudioPlayerStatus.Playing, () => {
-		interaction.reply('playing ' + fileName);
+		interaction.reply(':thumbsup:');
 	});
 };
