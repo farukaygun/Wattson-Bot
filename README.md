@@ -10,11 +10,9 @@ Support Wattson Bot for server costs.
 
 [![Kreosus](https://i.imgur.com/CXBYb6g.jpg?2)](https://kreosus.com/farukaygun)
 
-<br/><br/>
+<br/>
 
 # **Build**
-
-<br/>
 
 ## **Requirements**
 
@@ -23,8 +21,6 @@ Support Wattson Bot for server costs.
 <br/>
 
 ## **Installation**
-
-<br/>
 
 > [How to create a Discord bot?](https://discord.com/developers/docs/getting-started)
 >
@@ -39,23 +35,25 @@ Support Wattson Bot for server costs.
 - Open terminal in project dir and enter **node ./index.js**.
 - Done! Wattson should be alive now!
 
+<br/>
+
 > ### **Note**
 >
 > Don't forget to give;
+>
+> - **'Send Messages'**,
+> - **'Send Messages in Threads'**,
+> - **'Embed Links'**,
+> - **'Attach Files'**,
+> - **'Read Message History'**,
+> - **'Mention Everyone'**,
+> - **'Use Slash Commands'**,
+> - **'Connect'**,
+> - **'Speak'**
+>
+> permissions to Wattson!
 
-- **'Send Messages'**,
-- **'Send Messages in Threads'**,
-- **'Embed Links'**,
-- **'Attach Files'**,
-- **'Read Message History'**,
-- **'Mention Everyone'**,
-- **'Use Slash Commands'**,
-- **'Connect'**,
-- **'Speak'**
-
-permissions to Wattson!
-
-<br/><br/>
+<br/>
 
 # **Features**
 
