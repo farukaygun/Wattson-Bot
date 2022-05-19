@@ -4,6 +4,12 @@
 
 <br/>
 
+## **Add Wattson to your server**
+
+[![Wattson image](https://i.imgur.com/25XHUvF.jpg?1)](https://discord.com/api/oauth2/authorize?client_id=970358178975973376&permissions=277028784192&scope=bot%20applications.commands)
+
+<br/>
+
 ### **Support**
 
 Support Wattson Bot for server costs.
@@ -28,11 +34,13 @@ Support Wattson Bot for server costs.
 
 - Download [voice lines](https://1drv.ms/u/s!AsHdGflePryehtN7hq1YNtVv8G0Deg?e=fMDZH4) and extract to './{Project dir}/data/'
 - Open terminal in project dir and enter **npm install**.
-- Open **.env** file and fill blank values.
+- Rename **.env.example** to **.env** and fill in your tokens.
 - Enter your bot token to **TOKEN**.
 - Enter your bot client to **CLIENT_ID**.
 - Enter your welcome channel id to **WELCOME_CHANNEL_ID**.
-- Open terminal in project dir and enter **node ./index.js**.
+- Open terminal in project dir.
+- Enter **node ./deployCommands.js**.
+- After that, you can start Wattson with **node ./index.js**.
 - Done! Wattson should be alive now!
 
 <br/>
@@ -49,6 +57,7 @@ Support Wattson Bot for server costs.
 > - **'Mention Everyone'**,
 > - **'Use Slash Commands'**,
 > - **'Connect'**,
+> - **'Add Reactions'**,
 > - **'Speak'**
 >
 > permissions to Wattson!
