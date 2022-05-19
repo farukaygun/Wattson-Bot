@@ -81,6 +81,4 @@ client.on('guildMemberAdd', async (member) => {
 
 client.login(process.env.TOKEN);
 
-module.exports = {
-	client,
-};
+module.exports = { client };

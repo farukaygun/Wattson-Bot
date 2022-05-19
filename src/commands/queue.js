@@ -4,7 +4,7 @@ const { MessageEmbed } = require('discord.js');
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('queue')
-		.setDescription('Wattson displays the current queue.')
+		.setDescription('Wattson replies with the current song queue.')
 		.addNumberOption((option) =>
 			option
 				.setName('page')

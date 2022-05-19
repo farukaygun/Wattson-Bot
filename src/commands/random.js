@@ -15,7 +15,7 @@ const player = createAudioPlayer();
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('random')
-		.setDescription('Replies with random Wattson quip.')
+		.setDescription('Wattson replies with random Wattson quip.')
 		.addSubcommand((subCommand) =>
 			subCommand
 				.setName('text')

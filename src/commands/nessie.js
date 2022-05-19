@@ -4,7 +4,7 @@ const { GetRandomNessieImage } = require('../libs/randomNessieImage');
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('nessie')
-		.setDescription('Replies with random Nessie image.'),
+		.setDescription('Wattson replies with random Nessie image.'),
 	async execute(interaction) {
 		const imageObj = { image: await GetRandomNessieImage() };
 		await interaction.reply(imageObj.image);

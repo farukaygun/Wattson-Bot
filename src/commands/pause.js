@@ -3,7 +3,7 @@ const { SlashCommandBuilder } = require('@discordjs/builders');
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('pause')
-		.setDescription('Wattson displays the current song queue.'),
+		.setDescription('Wattson pauses the song.'),
 
 	async execute(interaction) {
 		await pause(interaction);
