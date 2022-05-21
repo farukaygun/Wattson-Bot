@@ -109,9 +109,11 @@ client.on('guildMemberAdd', async (member) => {
 			.setTitle('New Nessie Lover!')
 			.setDescription(`Welcome ${member}! \n\n` + GetRandomWelcomeTextQuip());
 
-		member.guild.channels.cache
-			.get(process.env.WELCOME_CHANNEL_NAME)
-			.send({ embeds: [embeddedMessage] });
+		client.channels.cache.filter((channel) => {
+			if (channel.name === process.env.WELCOME_CHANNEL_NAME) {
+				channel.send({ embeds: [embeddedMessage] });
+			}
+		});
 	} catch (error) {
 		console.error(error);
 	}
