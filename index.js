@@ -89,13 +89,33 @@ client.on('guildCreate', async (guild) => {
 			)
 			.setURL('https://farukaygun.github.io/Wattson-Bot')
 			.setImage('https://i.imgur.com/gdt8Cnt.jpg')
-			.setFooter({ text: 'Thanks for adding Wattson, I hope you enjoy it!' });
+			.setFooter({
+				text: 'Thanks for adding Wattson, I hope you enjoy it!',
+			});
 
-		const channel = guild.channels.cache.find(
+		let channel = guild.channels.cache.find(
 			(channel) => channel.name === process.env.WELCOME_CHANNEL_NAME
 		);
 
-		await channel.send({ embeds: [embeddedMessage] });
+		if (!channel) {
+			channel = await guild.channels.create('welcome', {
+				type: 'GUILD_TEXT',
+				permissionOverwrites: [
+					{
+						id: guild.id,
+						allow: [
+							'VIEW_CHANNEL',
+							'READ_MESSAGE_HISTORY',
+							'SEND_MESSAGES',
+							'SEND_MESSAGES_IN_THREADS',
+							'EMBED_LINKS',
+						],
+					},
+				],
+			});
+
+			await channel.send({ embeds: [embeddedMessage] });
+		} else await channel.send({ embeds: [embeddedMessage] });
 	} catch (error) {
 		console.error(error);
 	}
