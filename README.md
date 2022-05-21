@@ -12,7 +12,7 @@
 
 <br/>
 
-[![Wattson image](https://i.imgur.com/25XHUvF.jpg?1)](https://discord.com/api/oauth2/authorize?client_id=970358178975973376&permissions=277028784192&scope=bot%20applications.commands)
+[![Wattson image](https://i.imgur.com/25XHUvF.jpg?1)](https://discord.com/api/oauth2/authorize?client_id=970358178975973376&permissions=2150877264&scope=bot%20applications.commands)
 
 <br/>
 
