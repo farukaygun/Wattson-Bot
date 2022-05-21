@@ -79,7 +79,7 @@ client.on('guildCreate', () => {
 		.addField('/help', "Use the command '/help' to see all the commands.")
 		.addField(
 			'Support',
-			'You can suuport Wattson [here](https://kreosus.com/farukaygun).'
+			'You can support Wattson [here](https://kreosus.com/farukaygun).'
 		)
 		.setURL('https://farukaygun.github.io/Wattson-Bot')
 		.setImage('https://i.imgur.com/gdt8Cnt.jpg')
