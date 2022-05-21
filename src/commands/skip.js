@@ -15,12 +15,12 @@ const skip = async (interaction) => {
 
 	const queue = client.player.getQueue(interaction.guildId);
 	if (!queue)
-		return await interaction.reply('Wattson found no songs in the queue.');
+		return await interaction.editReply('Wattson found no songs in the queue.');
 
 	let currentSong = queue.current;
 	queue.skip();
 
-	await interaction.reply({
+	await interaction.editReply({
 		embeds: [
 			new MessageEmbed()
 				.setDescription(`${currentSong.title} has been skipped!`)

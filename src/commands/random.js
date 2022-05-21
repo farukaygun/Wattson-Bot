@@ -28,7 +28,7 @@ module.exports = {
 		),
 	async execute(interaction) {
 		if (interaction.options.getSubcommand() === 'text') {
-			await interaction.reply(await GetRandomTextQuip());
+			await interaction.editReply(await GetRandomTextQuip());
 		} else if (interaction.options.getSubcommand() === 'voice') {
 			await RandomVoiceLine(interaction);
 		}
@@ -39,15 +39,16 @@ const RandomVoiceLine = async (interaction) => {
 	// check user voice channel
 	const voiceChannel = interaction.member.voice.channel;
 	if (!voiceChannel) {
-		await interaction.reply('Nessie lovers must be in voice channel!');
+		await interaction.editReply('Nessie lovers must be in voice channel!');
 		return;
 	}
 
-	joinVoiceChannel({
+	const connection = joinVoiceChannel({
 		channelId: interaction.member.voice.channelId,
 		guildId: interaction.guildId,
 		adapterCreator: interaction.guild.voiceAdapterCreator,
-	}).subscribe(player);
+	});
+	const subscription = connection.subscribe(player);
 
 	// check required permissions
 	const permissions = interaction.guild.me.permissions;
@@ -55,7 +56,7 @@ const RandomVoiceLine = async (interaction) => {
 		!permissions.has(Permissions.FLAGS.CONNECT) ||
 		!permissions.has(Permissions.FLAGS.SPEAK)
 	) {
-		await interaction.reply(
+		await interaction.editReply(
 			'I need the permissions to join and speak in your voice channel!'
 		);
 		return;
@@ -67,6 +68,13 @@ const RandomVoiceLine = async (interaction) => {
 	);
 	player.play(audio);
 	player.once(AudioPlayerStatus.Playing, () => {
-		interaction.reply(':thumbsup:');
+		interaction.editReply(':thumbsup:');
+	});
+
+	player.once(AudioPlayerStatus.Idle, () => {
+		if (subscription) {
+			subscription.unsubscribe();
+		}
+		connection.destroy();
 	});
 };

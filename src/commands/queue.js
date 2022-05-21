@@ -22,13 +22,13 @@ const queue = async (interaction) => {
 
 	const queue = client.player.getQueue(interaction.guildId);
 	if (!queue || !queue.playing)
-		return await interaction.reply('Wattson found no songs in the queue.');
+		return await interaction.editReply('Wattson found no songs in the queue.');
 
 	const totalPages = Math.ceil(queue.tracks.length / 10) || 1;
 	const page = (interaction.options.getNumber('page') || 1) - 1;
 
 	if (page > totalPages)
-		return await interaction.reply(
+		return await interaction.editReply(
 			`Invalid Page. There are only a total of ${totalPages} pages of songs`
 		);
 
@@ -43,7 +43,7 @@ const queue = async (interaction) => {
 
 	const currentSong = queue.current;
 
-	await interaction.reply({
+	await interaction.editReply({
 		embeds: [
 			new MessageEmbed()
 				.setDescription(

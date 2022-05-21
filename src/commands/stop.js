@@ -14,8 +14,10 @@ const stop = async (interaction) => {
 
 	const queue = client.player.getQueue(interaction.guildId);
 	if (!queue)
-		return await interaction.reply('Wattson found no songs in the queue.');
+		return await interaction.editReply('Wattson found no songs in the queue.');
 
+	queue.clear();
 	queue.destroy();
-	await interaction.reply('Bye-bye squad!');
+
+	await interaction.editReply('Bye-bye squad!');
 };

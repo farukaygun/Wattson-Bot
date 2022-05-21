@@ -7,6 +7,6 @@ module.exports = {
 		.setDescription('Wattson replies with random Nessie image.'),
 	async execute(interaction) {
 		const imageObj = { image: await GetRandomNessieImage() };
-		await interaction.reply(imageObj.image);
+		await interaction.editReply(imageObj.image);
 	},
 };

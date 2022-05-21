@@ -14,6 +14,6 @@ module.exports = {
 			.addField('Nessie Images', 'thanks to u/Grifindor_44')
 			.setImage('https://i.imgur.com/gdt8Cnt.jpg');
 
-		await interaction.reply({ embeds: [embeddedMessage] });
+		await interaction.editReply({ embeds: [embeddedMessage] });
 	},
 };

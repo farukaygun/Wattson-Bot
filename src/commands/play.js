@@ -50,7 +50,7 @@ const playSong = async (interaction) => {
 	// check user voice channel
 	const voiceChannel = interaction.member.voice.channel;
 	if (!voiceChannel) {
-		await interaction.reply('Nessie lovers must be in voice channel!');
+		await interaction.editReply('Nessie lovers must be in voice channel!');
 		return;
 	}
 
@@ -60,7 +60,7 @@ const playSong = async (interaction) => {
 		!permissions.has(Permissions.FLAGS.CONNECT) ||
 		!permissions.has(Permissions.FLAGS.SPEAK)
 	) {
-		await interaction.reply(
+		await interaction.editReply(
 			'Wattson need the permissions to join and speak in your voice channel!'
 		);
 		return;
@@ -81,7 +81,7 @@ const playSong = async (interaction) => {
 			searchEngine: QueryType.YOUTUBE_VIDEO,
 		});
 		if (result.tracks.length === 0) {
-			return interaction.reply('No results!');
+			return interaction.editReply('No results!');
 		}
 
 		const song = result.tracks[0];
@@ -99,7 +99,7 @@ const playSong = async (interaction) => {
 			searchEngine: QueryType.YOUTUBE_PLAYLIST,
 		});
 
-		if (result.tracks.length === 0) return interaction.reply('No results');
+		if (result.tracks.length === 0) return interaction.editReply('No results');
 
 		const playlist = result.playlist;
 		await queue.addTracks(result.tracks);
@@ -115,7 +115,7 @@ const playSong = async (interaction) => {
 			searchEngine: QueryType.AUTO,
 		});
 
-		if (result.tracks.length === 0) return interaction.reply('No results');
+		if (result.tracks.length === 0) return interaction.editReply('No results');
 
 		const song = result.tracks[0];
 		await queue.addTrack(song);
@@ -131,7 +131,7 @@ const playSong = async (interaction) => {
 		await queue.play();
 	}
 
-	await interaction.reply({
+	await interaction.editReply({
 		embeds: [embed],
 	});
 };

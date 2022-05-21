@@ -14,10 +14,10 @@ const resume = async (interaction) => {
 
 	const queue = client.player.getQueue(interaction.guildId);
 	if (!queue)
-		return await interaction.reply('Wattson found no songs in the queue.');
+		return await interaction.editReply('Wattson found no songs in the queue.');
 
 	queue.setPaused(false);
-	await interaction.reply(
+	await interaction.editReply(
 		'Wattson has been resumed the song! Use `/pause` to pause the song.'
 	);
 };

@@ -46,5 +46,5 @@ const help = async (interaction) => {
 		message += `${command.name} :arrow_right: ${command.description}\n`;
 	});
 
-	interaction.reply(message);
+	interaction.editReply(message);
 };
