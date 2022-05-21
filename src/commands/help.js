@@ -40,11 +40,15 @@ const commands = [
 
 // map commands variable
 const help = async (interaction) => {
-	let message = "**Wattson's command list:**\n\n";
+	try {
+		let message = "**Wattson's command list:**\n\n";
 
-	commands.map((command) => {
-		message += `${command.name} :arrow_right: ${command.description}\n`;
-	});
+		commands.map((command) => {
+			message += `${command.name} :arrow_right: ${command.description}\n`;
+		});
 
-	interaction.editReply(message);
+		interaction.editReply(message);
+	} catch (error) {
+		console.error(error);
+	}
 };

@@ -11,25 +11,31 @@ module.exports = {
 };
 
 const info = async (interaction) => {
-	const { client } = require('../../index');
+	try {
+		const { client } = require('../../index');
 
-	const queue = client.player.getQueue(interaction.guildId);
-	if (!queue)
-		return await interaction.editReply('Wattson found no songs in the queue.');
+		const queue = client.player.getQueue(interaction.guildId);
+		if (!queue)
+			return await interaction.editReply(
+				'Wattson found no songs in the queue.'
+			);
 
-	let bar = queue.createProgressBar({
-		queue: false,
-		length: 19,
-	});
+		let bar = queue.createProgressBar({
+			queue: false,
+			length: 19,
+		});
 
-	const song = queue.current;
-	await interaction.editReply({
-		embeds: [
-			new MessageEmbed()
-				.setThumbnail(song.thumbnail)
-				.setDescription(
-					`Currently Playing [${song.title}](${song.url})\n\n` + bar
-				),
-		],
-	});
+		const song = queue.current;
+		await interaction.editReply({
+			embeds: [
+				new MessageEmbed()
+					.setThumbnail(song.thumbnail)
+					.setDescription(
+						`Currently Playing [${song.title}](${song.url})\n\n` + bar
+					),
+			],
+		});
+	} catch (error) {
+		console.error(error);
+	}
 };

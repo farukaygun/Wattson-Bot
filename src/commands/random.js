@@ -36,45 +36,49 @@ module.exports = {
 };
 
 const RandomVoiceLine = async (interaction) => {
-	// check user voice channel
-	const voiceChannel = interaction.member.voice.channel;
-	if (!voiceChannel) {
-		await interaction.editReply('Nessie lovers must be in voice channel!');
-		return;
-	}
-
-	const connection = joinVoiceChannel({
-		channelId: interaction.member.voice.channelId,
-		guildId: interaction.guildId,
-		adapterCreator: interaction.guild.voiceAdapterCreator,
-	});
-	const subscription = connection.subscribe(player);
-
-	// check required permissions
-	const permissions = interaction.guild.me.permissions;
-	if (
-		!permissions.has(Permissions.FLAGS.CONNECT) ||
-		!permissions.has(Permissions.FLAGS.SPEAK)
-	) {
-		await interaction.editReply(
-			'I need the permissions to join and speak in your voice channel!'
-		);
-		return;
-	}
-
-	const fileName = await GetRandomVoiceLineQuip();
-	const audio = createAudioResource(
-		path.join(__dirname, '../data/Wattson Voice Lines/sounds/' + fileName)
-	);
-	player.play(audio);
-	player.once(AudioPlayerStatus.Playing, () => {
-		interaction.editReply(':thumbsup:');
-	});
-
-	player.once(AudioPlayerStatus.Idle, () => {
-		if (subscription) {
-			subscription.unsubscribe();
+	try {
+		// check user voice channel
+		const voiceChannel = interaction.member.voice.channel;
+		if (!voiceChannel) {
+			await interaction.editReply('Nessie lovers must be in voice channel!');
+			return;
 		}
-		connection.destroy();
-	});
+
+		const connection = joinVoiceChannel({
+			channelId: interaction.member.voice.channelId,
+			guildId: interaction.guildId,
+			adapterCreator: interaction.guild.voiceAdapterCreator,
+		});
+		const subscription = connection.subscribe(player);
+
+		// check required permissions
+		const permissions = interaction.guild.me.permissions;
+		if (
+			!permissions.has(Permissions.FLAGS.CONNECT) ||
+			!permissions.has(Permissions.FLAGS.SPEAK)
+		) {
+			await interaction.editReply(
+				'I need the permissions to join and speak in your voice channel!'
+			);
+			return;
+		}
+
+		const fileName = await GetRandomVoiceLineQuip();
+		const audio = createAudioResource(
+			path.join(__dirname, '../data/Wattson Voice Lines/sounds/' + fileName)
+		);
+		player.play(audio);
+		player.once(AudioPlayerStatus.Playing, () => {
+			interaction.editReply(':thumbsup:');
+		});
+
+		player.once(AudioPlayerStatus.Idle, () => {
+			if (subscription) {
+				subscription.unsubscribe();
+			}
+			connection.destroy();
+		});
+	} catch (error) {
+		console.log(error);
+	}
 };

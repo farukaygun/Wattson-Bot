@@ -18,45 +18,51 @@ module.exports = {
 };
 
 const queue = async (interaction) => {
-	const { client } = require('../../index');
+	try {
+		const { client } = require('../../index');
 
-	const queue = client.player.getQueue(interaction.guildId);
-	if (!queue || !queue.playing)
-		return await interaction.editReply('Wattson found no songs in the queue.');
+		const queue = client.player.getQueue(interaction.guildId);
+		if (!queue || !queue.playing)
+			return await interaction.editReply(
+				'Wattson found no songs in the queue.'
+			);
 
-	const totalPages = Math.ceil(queue.tracks.length / 10) || 1;
-	const page = (interaction.options.getNumber('page') || 1) - 1;
+		const totalPages = Math.ceil(queue.tracks.length / 10) || 1;
+		const page = (interaction.options.getNumber('page') || 1) - 1;
 
-	if (page > totalPages)
-		return await interaction.editReply(
-			`Invalid Page. There are only a total of ${totalPages} pages of songs`
-		);
+		if (page > totalPages)
+			return await interaction.editReply(
+				`Invalid Page. There are only a total of ${totalPages} pages of songs`
+			);
 
-	const queueString = queue.tracks
-		.slice(page * 10, page * 10 + 10)
-		.map((song, i) => {
-			return `**${page * 10 + i + 1}.** \`[${song.duration}]\` ${
-				song.title
-			} -- <@${song.requestedBy.id}>`;
-		})
-		.join('\n');
+		const queueString = queue.tracks
+			.slice(page * 10, page * 10 + 10)
+			.map((song, i) => {
+				return `**${page * 10 + i + 1}.** \`[${song.duration}]\` ${
+					song.title
+				} -- <@${song.requestedBy.id}>`;
+			})
+			.join('\n');
 
-	const currentSong = queue.current;
+		const currentSong = queue.current;
 
-	await interaction.editReply({
-		embeds: [
-			new MessageEmbed()
-				.setDescription(
-					`**Currently Playing**\n` +
-						(currentSong
-							? `\`[${currentSong.duration}]\` ${currentSong.title} -- <@${currentSong.requestedBy.id}>`
-							: 'None') +
-						`\n\n**Queue**\n${queueString}`
-				)
-				.setFooter({
-					text: `Page ${page + 1} of ${totalPages}`,
-				})
-				.setThumbnail(currentSong.setThumbnail),
-		],
-	});
+		await interaction.editReply({
+			embeds: [
+				new MessageEmbed()
+					.setDescription(
+						`**Currently Playing**\n` +
+							(currentSong
+								? `\`[${currentSong.duration}]\` ${currentSong.title} -- <@${currentSong.requestedBy.id}>`
+								: 'None') +
+							`\n\n**Queue**\n${queueString}`
+					)
+					.setFooter({
+						text: `Page ${page + 1} of ${totalPages}`,
+					})
+					.setThumbnail(currentSong.setThumbnail),
+			],
+		});
+	} catch (error) {
+		console.error(error);
+	}
 };

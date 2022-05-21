@@ -11,20 +11,26 @@ module.exports = {
 };
 
 const skip = async (interaction) => {
-	const { client } = require('../../index');
+	try {
+		const { client } = require('../../index');
 
-	const queue = client.player.getQueue(interaction.guildId);
-	if (!queue)
-		return await interaction.editReply('Wattson found no songs in the queue.');
+		const queue = client.player.getQueue(interaction.guildId);
+		if (!queue)
+			return await interaction.editReply(
+				'Wattson found no songs in the queue.'
+			);
 
-	let currentSong = queue.current;
-	queue.skip();
+		let currentSong = queue.current;
+		queue.skip();
 
-	await interaction.editReply({
-		embeds: [
-			new MessageEmbed()
-				.setDescription(`${currentSong.title} has been skipped!`)
-				.setThumbnail(currentSong.thumbnail),
-		],
-	});
+		await interaction.editReply({
+			embeds: [
+				new MessageEmbed()
+					.setDescription(`${currentSong.title} has been skipped!`)
+					.setThumbnail(currentSong.thumbnail),
+			],
+		});
+	} catch (error) {
+		console.error(error);
+	}
 };

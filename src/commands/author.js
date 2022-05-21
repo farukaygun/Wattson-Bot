@@ -6,6 +6,12 @@ module.exports = {
 		.setName('author')
 		.setDescription('Wattson replies with authors.'),
 	async execute(interaction) {
+		await author(interaction);
+	},
+};
+
+const author = async (interaction) => {
+	try {
 		const embeddedMessage = new MessageEmbed()
 			.setColor('0099ff')
 			.setTitle('Contributors')
@@ -15,5 +21,7 @@ module.exports = {
 			.setImage('https://i.imgur.com/gdt8Cnt.jpg');
 
 		await interaction.editReply({ embeds: [embeddedMessage] });
-	},
+	} catch (error) {
+		console.error(error);
+	}
 };

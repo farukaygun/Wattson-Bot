@@ -10,14 +10,20 @@ module.exports = {
 };
 
 const stop = async (interaction) => {
-	const { client } = require('../../index');
+	try {
+		const { client } = require('../../index');
 
-	const queue = client.player.getQueue(interaction.guildId);
-	if (!queue)
-		return await interaction.editReply('Wattson found no songs in the queue.');
+		const queue = client.player.getQueue(interaction.guildId);
+		if (!queue)
+			return await interaction.editReply(
+				'Wattson found no songs in the queue.'
+			);
 
-	queue.clear();
-	queue.destroy();
+		queue.clear();
+		queue.destroy();
 
-	await interaction.editReply('Bye-bye squad!');
+		await interaction.editReply('Bye-bye squad!');
+	} catch (error) {
+		console.error(error);
+	}
 };

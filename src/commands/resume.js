@@ -10,14 +10,20 @@ module.exports = {
 };
 
 const resume = async (interaction) => {
-	const { client } = require('../../index');
+	try {
+		const { client } = require('../../index');
 
-	const queue = client.player.getQueue(interaction.guildId);
-	if (!queue)
-		return await interaction.editReply('Wattson found no songs in the queue.');
+		const queue = client.player.getQueue(interaction.guildId);
+		if (!queue)
+			return await interaction.editReply(
+				'Wattson found no songs in the queue.'
+			);
 
-	queue.setPaused(false);
-	await interaction.editReply(
-		'Wattson has been resumed the song! Use `/pause` to pause the song.'
-	);
+		queue.setPaused(false);
+		await interaction.editReply(
+			'Wattson has been resumed the song! Use `/pause` to pause the song.'
+		);
+	} catch (error) {
+		console.error(error);
+	}
 };
