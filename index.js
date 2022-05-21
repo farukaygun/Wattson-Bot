@@ -50,59 +50,71 @@ for (const file of eventFiles) {
 }
 
 client.on('interactionCreate', async (interaction) => {
-	if (!interaction.isCommand()) return;
-
-	const command = client.commands.get(interaction.commandName);
-
-	if (!command) return;
-
 	try {
-		await interaction.deferReply();
-		await command.execute(interaction);
+		if (!interaction.isCommand()) return;
+
+		const command = client.commands.get(interaction.commandName);
+
+		if (!command) return;
+
+		try {
+			await interaction.deferReply();
+			await command.execute(interaction);
+		} catch (error) {
+			console.error(error);
+			await interaction.editReply({
+				content: 'There was an error while executing command!',
+				epheremal: true,
+			});
+		}
 	} catch (error) {
 		console.error(error);
-		await interaction.editReply({
-			content: 'There was an error while executing command!',
-			epheremal: true,
-		});
 	}
 });
 
 // When Wattson joined new channel send a welcome message
-client.on('guildCreate', () => {
-	const embeddedMessage = new MessageEmbed()
-		.setTitle('Hi :wave:, Wattson is here!')
-		.setDescription(GetRandomWelcomeTextQuip())
-		.addField(
-			'Getting Started',
-			'Firstly, Wattson is still under development and is getting frequent changes.'
-		)
-		.addField('/help', "Use the command '/help' to see all the commands.")
-		.addField(
-			'Support',
-			'You can support Wattson [here](https://kreosus.com/farukaygun).'
-		)
-		.setURL('https://farukaygun.github.io/Wattson-Bot')
-		.setImage('https://i.imgur.com/gdt8Cnt.jpg')
-		.setFooter({ text: 'Thanks for adding Wattson, I hope you enjoy it!' });
+client.on('guildCreate', async () => {
+	try {
+		const embeddedMessage = new MessageEmbed()
+			.setTitle('Hi :wave:, Wattson is here!')
+			.setDescription(GetRandomWelcomeTextQuip())
+			.addField(
+				'Getting Started',
+				'Firstly, Wattson is still under development and is getting frequent changes.'
+			)
+			.addField('/help', "Use the command '/help' to see all the commands.")
+			.addField(
+				'Support',
+				'You can support Wattson [here](https://kreosus.com/farukaygun).'
+			)
+			.setURL('https://farukaygun.github.io/Wattson-Bot')
+			.setImage('https://i.imgur.com/gdt8Cnt.jpg')
+			.setFooter({ text: 'Thanks for adding Wattson, I hope you enjoy it!' });
 
-	client.channels.cache.filter((channel) => {
-		if (channel.name === process.env.WELCOME_CHANNEL_NAME) {
-			channel.send({ embeds: [embeddedMessage] });
-		}
-	});
+		client.channels.cache.filter((channel) => {
+			if (channel.name === process.env.WELCOME_CHANNEL_NAME) {
+				channel.send({ embeds: [embeddedMessage] });
+			}
+		});
+	} catch (error) {
+		console.error(error);
+	}
 });
 
 // Welcome message
 client.on('guildMemberAdd', async (member) => {
-	const embeddedMessage = new MessageEmbed()
-		.setColor('0099ff')
-		.setTitle('New Nessie Lover!')
-		.setDescription(`Welcome ${member}! \n\n` + GetRandomWelcomeTextQuip());
+	try {
+		const embeddedMessage = new MessageEmbed()
+			.setColor('0099ff')
+			.setTitle('New Nessie Lover!')
+			.setDescription(`Welcome ${member}! \n\n` + GetRandomWelcomeTextQuip());
 
-	member.guild.channels.cache
-		.get(process.env.WELCOME_CHANNEL_NAME)
-		.send({ embeds: [embeddedMessage] });
+		member.guild.channels.cache
+			.get(process.env.WELCOME_CHANNEL_NAME)
+			.send({ embeds: [embeddedMessage] });
+	} catch (error) {
+		console.error(error);
+	}
 });
 
 client.login(process.env.TOKEN);
