@@ -67,6 +67,31 @@ client.on('interactionCreate', async (interaction) => {
 	}
 });
 
+// When Wattson joined new channel send a welcome message
+client.on('guildCreate', () => {
+	const embeddedMessage = new MessageEmbed()
+		.setTitle('Hi :wave:, Wattson is here!')
+		.setDescription(GetRandomWelcomeTextQuip())
+		.addField(
+			'Getting Started',
+			'Firstly, Wattson is still under development and is getting frequent changes.'
+		)
+		.addField('/help', "Use the command '/help' to see all the commands.")
+		.addField(
+			'Support',
+			'You can suuport Wattson [here](https://kreosus.com/farukaygun).'
+		)
+		.setURL('https://farukaygun.github.io/Wattson-Bot')
+		.setImage('https://i.imgur.com/gdt8Cnt.jpg')
+		.setFooter({ text: 'Thanks for adding Wattson, I hope you enjoy it!' });
+
+	client.channels.cache.filter((channel) => {
+		if (channel.name === process.env.WELCOME_CHANNEL_NAME) {
+			channel.send({ embeds: [embeddedMessage] });
+		}
+	});
+});
+
 // Welcome message
 client.on('guildMemberAdd', async (member) => {
 	const embeddedMessage = new MessageEmbed()
@@ -75,7 +100,7 @@ client.on('guildMemberAdd', async (member) => {
 		.setDescription(`Welcome ${member}! \n\n` + GetRandomWelcomeTextQuip());
 
 	member.guild.channels.cache
-		.get(process.env.WELCOME_CHANNEL_ID)
+		.get(process.env.WELCOME_CHANNEL_NAME)
 		.send({ embeds: [embeddedMessage] });
 });
 
