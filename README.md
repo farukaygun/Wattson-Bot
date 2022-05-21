@@ -37,7 +37,7 @@ Support Wattson Bot for server costs.
 - Rename **.env.example** to **.env** and fill in your tokens.
 - Enter your bot token to **TOKEN**.
 - Enter your bot client to **CLIENT_ID**.
-- Enter your welcome channel id to **WELCOME_CHANNEL_ID**.
+- Enter your welcome channel name to **WELCOME_CHANNEL_NAME**.
 - Open terminal in project dir.
 - Enter **node ./deployCommands.js**.
 - After that, you can start Wattson with **node ./index.js**.
@@ -70,12 +70,13 @@ Support Wattson Bot for server costs.
 
 ### **General**
 
+- **/help** : Wattson replies with her commands.
 - **/random**
   - parameters:
-    - **text**: Replies with random Wattson text quip.
-    - **voice**: Replies with random Wattson voice line.
-- **/nessie** : Replies with random Nessie image.
-- **/author**: Replies with Wattson bot contributors.
+    - **text**: Wattson replies with random Wattson text quip.
+    - **voice**: Wattson replies with random Wattson voice line.
+- **/nessie** : Wattson replies with random Nessie image.
+- **/author**: Wattson replies with Wattson bot contributors.
 
 ### **Music**
 
@@ -97,4 +98,5 @@ Support Wattson Bot for server costs.
 
 ## **Other Feautures**
 
-- Wattson say welcome users who joined channel.
+- Wattson says hello when she joins new channel.
+- Wattson says welcome users who joined channel.
