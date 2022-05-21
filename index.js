@@ -73,7 +73,7 @@ client.on('interactionCreate', async (interaction) => {
 });
 
 // When Wattson joined new channel send a welcome message
-client.on('guildCreate', async () => {
+client.on('guildCreate', async (guild) => {
 	try {
 		const embeddedMessage = new MessageEmbed()
 			.setTitle('Hi :wave:, Wattson is here!')
@@ -91,11 +91,11 @@ client.on('guildCreate', async () => {
 			.setImage('https://i.imgur.com/gdt8Cnt.jpg')
 			.setFooter({ text: 'Thanks for adding Wattson, I hope you enjoy it!' });
 
-		client.channels.cache.filter((channel) => {
-			if (channel.name === process.env.WELCOME_CHANNEL_NAME) {
-				channel.send({ embeds: [embeddedMessage] });
-			}
-		});
+		const channel = guild.channels.cache.find(
+			(channel) => channel.name === process.env.WELCOME_CHANNEL_NAME
+		);
+
+		await channel.send({ embeds: [embeddedMessage] });
 	} catch (error) {
 		console.error(error);
 	}
@@ -109,11 +109,11 @@ client.on('guildMemberAdd', async (member) => {
 			.setTitle('New Nessie Lover!')
 			.setDescription(`Welcome ${member}! \n\n` + GetRandomWelcomeTextQuip());
 
-		client.channels.cache.filter((channel) => {
-			if (channel.name === process.env.WELCOME_CHANNEL_NAME) {
-				channel.send({ embeds: [embeddedMessage] });
-			}
-		});
+		const channel = member.guild.channels.cache.find(
+			(channel) => channel.name === process.env.WELCOME_CHANNEL_NAME
+		);
+
+		await channel.send({ embeds: [embeddedMessage] });
 	} catch (error) {
 		console.error(error);
 	}
