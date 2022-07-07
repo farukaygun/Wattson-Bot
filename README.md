@@ -16,14 +16,6 @@
 
 <br/>
 
-### **Support**
-
-Support Wattson Bot for server costs.
-
-[![Kreosus](https://i.imgur.com/CXBYb6g.jpg?2)](https://kreosus.com/farukaygun)
-
-<br/>
-
 # **Build**
 
 ## **Requirements**
