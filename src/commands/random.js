@@ -1,6 +1,6 @@
 const path = require('path');
 const { SlashCommandBuilder } = require('@discordjs/builders');
-const { Permissions } = require('discord.js');
+const { PermissionsBitField } = require('discord.js');
 const { GetRandomTextQuip } = require('../libs/randomTextQuip');
 const { GetRandomVoiceLineQuip } = require('../libs/randomVoiceLineQuip');
 const {
@@ -52,10 +52,10 @@ const RandomVoiceLine = async (interaction) => {
 		const subscription = connection.subscribe(player);
 
 		// check required permissions
-		const permissions = interaction.guild.me.permissions;
+		const permissions = interaction.guild.members.me.permissions;
 		if (
-			!permissions.has(Permissions.FLAGS.CONNECT) ||
-			!permissions.has(Permissions.FLAGS.SPEAK)
+			!permissions.has(PermissionsBitField.Flags.Connect) ||
+			!permissions.has(PermissionsBitField.Flags.Speak)
 		) {
 			await interaction.editReply(
 				'I need the permissions to join and speak in your voice channel!'

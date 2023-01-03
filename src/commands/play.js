@@ -1,5 +1,5 @@
-const { SlashCommandBuilder } = require('@discordjs/builders');
-const { MessageEmbed, Permissions } = require('discord.js');
+const { SlashCommandBuilder, EmbedBuilder } = require('@discordjs/builders');
+const { PermissionsBitField } = require('discord.js');
 const { QueryType } = require('discord-player');
 
 module.exports = {
@@ -56,10 +56,10 @@ const playSong = async (interaction) => {
 		}
 
 		// check required permissions
-		const permissions = interaction.guild.me.permissions;
+		const permissions = interaction.guild.members.me.permissions;
 		if (
-			!permissions.has(Permissions.FLAGS.CONNECT) ||
-			!permissions.has(Permissions.FLAGS.SPEAK)
+			!permissions.has(PermissionsBitField.Flags.Connect) ||
+			!permissions.has(PermissionsBitField.Flags.Speak)
 		) {
 			await interaction.editReply(
 				'Wattson need the permissions to join and speak in your voice channel!'
@@ -72,7 +72,7 @@ const playSong = async (interaction) => {
 			await queue.connect(interaction.member.voice.channel);
 		}
 
-		let embed = new MessageEmbed();
+		let embed = new EmbedBuilder();
 
 		//sub commands
 		if (interaction.options.getSubcommand() === 'song') {
