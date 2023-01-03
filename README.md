@@ -1,5 +1,7 @@
 # **Wattson Bot**
 
+Wattson Bot is a Discord music bot.
+
 > **'Circuit's broken! Someone else is here.'**
 
 <br/>

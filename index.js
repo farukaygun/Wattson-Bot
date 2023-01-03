@@ -1,6 +1,6 @@
 const dotenv = require('dotenv');
 const fs = require('node:fs');
-const { Client, Collection, Intents, MessageEmbed } = require('discord.js');
+const { Client, Collection, GatewayIntentBits, Partials, EmbedBuilder } = require('discord.js');
 const {
 	GetRandomWelcomeTextQuip,
 } = require('./src/libs/randomWelcomeTextQuip');
@@ -9,10 +9,13 @@ const { Player } = require('discord-player');
 
 const client = new Client({
 	intents: [
-		Intents.FLAGS.GUILDS,
-		Intents.FLAGS.GUILD_MEMBERS,
-		Intents.FLAGS.GUILD_VOICE_STATES,
+		GatewayIntentBits.Guilds,
+		GatewayIntentBits.GuildMembers,
+		GatewayIntentBits.GuildVoiceStates,
 	],
+	partials: [
+		Partials.Channel
+	]
 });
 
 dotenv.config();
@@ -75,23 +78,36 @@ client.on('interactionCreate', async (interaction) => {
 // When Wattson joined new channel send a welcome message
 client.on('guildCreate', async (guild) => {
 	try {
-		const embeddedMessage = new MessageEmbed()
+		// const embeddedMessage = new MessageEmbed()
+		// 	.setTitle('Hi :wave:, Wattson is here!')
+		// 	.setDescription(GetRandomWelcomeTextQuip())
+		// 	.addField(
+		// 		'Getting Started',
+		// 		'Firstly, Wattson is still under development and is getting frequent changes.'
+		// 	)
+		// 	.addField('/help', "Use the command '/help' to see all the commands.")
+		// 	.addField(
+		// 		'Support',
+		// 		'You can support Wattson [here](https://kreosus.com/farukaygun).'
+		// 	)
+		// 	.setURL('https://farukaygun.github.io/Wattson-Bot')
+		// 	.setImage('https://i.imgur.com/gdt8Cnt.jpg')
+		// 	.setFooter({
+		// 		text: 'Thanks for adding Wattson, I hope you enjoy it!',
+		// 	});
+		const embeddedMessage = new EmbedBuilder().addFields
 			.setTitle('Hi :wave:, Wattson is here!')
 			.setDescription(GetRandomWelcomeTextQuip())
-			.addField(
+			.addFields(
 				'Getting Started',
 				'Firstly, Wattson is still under development and is getting frequent changes.'
 			)
 			.addField('/help', "Use the command '/help' to see all the commands.")
-			.addField(
-				'Support',
-				'You can support Wattson [here](https://kreosus.com/farukaygun).'
-			)
 			.setURL('https://farukaygun.github.io/Wattson-Bot')
-			.setImage('https://i.imgur.com/gdt8Cnt.jpg')
-			.setFooter({
-				text: 'Thanks for adding Wattson, I hope you enjoy it!',
-			});
+		 	.setImage('https://i.imgur.com/gdt8Cnt.jpg')
+		 	.setFooter({
+		 		text: 'Thanks for adding Wattson, I hope you enjoy it!',
+		 	});
 
 		let channel = guild.channels.cache.find(
 			(channel) => channel.name === process.env.WELCOME_CHANNEL_NAME
@@ -124,11 +140,11 @@ client.on('guildCreate', async (guild) => {
 // Welcome message
 client.on('guildMemberAdd', async (member) => {
 	try {
-		const embeddedMessage = new MessageEmbed()
+		const embeddedMessage = new EmbedBuilder()
 			.setColor('0099ff')
 			.setTitle('New Nessie Lover!')
 			.setDescription(`Welcome ${member}! \n\n` + GetRandomWelcomeTextQuip());
-
+		
 		const channel = member.guild.channels.cache.find(
 			(channel) => channel.name === process.env.WELCOME_CHANNEL_NAME
 		);
